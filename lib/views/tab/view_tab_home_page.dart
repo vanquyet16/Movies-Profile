@@ -3,6 +3,7 @@ import 'dart:ffi';
 import 'package:flutter/material.dart';
 import 'package:movies_profile/interface/interface_home.dart';
 import 'package:movies_profile/sevices/api/api_movie.dart';
+import 'package:movies_profile/views/screen/view_search_movies.dart';
 
 import '../../component/component_appbar.dart';
 import '../../models/movie.dart';
@@ -47,7 +48,12 @@ class _MyHomePageState extends State<MyHomePage> implements HomeView {
           color: Color(0xFF19AFDF),
           size: 30,
         ),
-        onTap: () {},
+        onTap: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => SearchScreen()),
+          );
+        },
       ),
       body: SingleChildScrollView(
         physics: const BouncingScrollPhysics(),
@@ -140,7 +146,7 @@ class MoviesComing extends StatelessWidget {
     return SizedBox(
       height: 200,
       child: ClipRRect(
-        borderRadius: BorderRadius.circular(8),
+        borderRadius: BorderRadius.circular(2),
         child: ListView.builder(
           scrollDirection: Axis.horizontal,
           physics: const BouncingScrollPhysics(),

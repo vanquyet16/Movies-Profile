@@ -102,7 +102,10 @@ class _BodyState extends State<Body> implements RegisterView {
         CustomTextField(
           controller: edFullNameController,
           hintText: "Nhập Họ Tên",
-          prefixIcon: Icons.person,
+          prefixIcon: Icon(
+            Icons.person,
+            color: Colors.black,
+          ),
         ),
         const Align(
           alignment: Alignment(-0.88, -0.1),
@@ -114,7 +117,10 @@ class _BodyState extends State<Body> implements RegisterView {
         CustomTextField(
           controller: edUserNameController,
           hintText: "Nhập Tài Khoản",
-          prefixIcon: Icons.person,
+          prefixIcon: Icon(
+            Icons.person,
+            color: Colors.black,
+          ),
         ),
         const Align(
           alignment: Alignment(-0.88, -0.1),
@@ -124,10 +130,12 @@ class _BodyState extends State<Body> implements RegisterView {
           ),
         ),
         CustomTextField(
-          controller: edPassController,
-          hintText: "Nhâp Mật Khẩu",
-          prefixIcon: Icons.lock,
-        ),
+            controller: edPassController,
+            hintText: "Nhâp Mật Khẩu",
+            prefixIcon: Icon(
+              Icons.lock,
+              color: Colors.black,
+            )),
         const Align(
           alignment: Alignment(-0.77, -0.1),
           child: Text(
@@ -138,7 +146,10 @@ class _BodyState extends State<Body> implements RegisterView {
         CustomTextField(
           controller: edRePassController,
           hintText: "Nhâp Lại Mật Khẩu",
-          prefixIcon: Icons.lock,
+          prefixIcon: Icon(
+            Icons.lock,
+            color: Colors.black,
+          ),
         ),
         const SizedBox(
           height: 10,

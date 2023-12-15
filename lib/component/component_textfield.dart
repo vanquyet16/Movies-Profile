@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 class CustomTextField extends StatelessWidget {
   final TextEditingController controller;
   final String hintText;
-  final IconData prefixIcon;
+  final Icon prefixIcon;
 
   const CustomTextField({
     Key? key,
@@ -33,10 +33,7 @@ class CustomTextField extends StatelessWidget {
           decoration: InputDecoration(
             hintText: hintText,
             border: InputBorder.none,
-            prefixIcon: Icon(
-              prefixIcon,
-              color: Colors.black,
-            ),
+            prefixIcon: prefixIcon,
             prefixIconConstraints: const BoxConstraints(minWidth: 30),
           ),
         ),

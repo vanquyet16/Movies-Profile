@@ -3,14 +3,14 @@ import 'package:flutter/material.dart';
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   final String title1;
   final String title2;
-  final Icon iconData;
+  final Icon? iconData;
   final void Function() onTap;
 
   const CustomAppBar({
     Key? key,
     required this.title1,
     required this.title2,
-    required this.iconData,
+    this.iconData, // Update the type to Icon?
     required this.onTap,
   }) : super(key: key);
 
@@ -41,11 +41,12 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
             ]),
           ),
           const Spacer(),
-          IconButton(
-            splashRadius: 20,
-            icon: iconData,
-            onPressed: onTap,
-          ),
+          if (iconData != null) // Check if iconData is not null
+            IconButton(
+              splashRadius: 20,
+              icon: iconData!,
+              onPressed: onTap,
+            ),
         ],
       ),
     );
