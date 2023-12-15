@@ -101,7 +101,10 @@ class _BodyState extends State<Body> implements LoginView {
         CustomTextField(
           controller: edUserController,
           hintText: "Nhập Tài Khoản",
-          prefixIcon: Icons.person,
+          prefixIcon: Icon(
+            Icons.person,
+            color: Colors.black,
+          ),
         ),
         const Align(
           alignment: Alignment(-0.88, -0.1),
@@ -109,10 +112,11 @@ class _BodyState extends State<Body> implements LoginView {
               style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold)),
         ),
         CustomTextField(
-          controller: edPassController,
-          hintText: "Nhâp Mật Khẩu",
-          prefixIcon: Icons.lock,
-        ),
+            controller: edPassController,
+            hintText: "Nhâp Mật Khẩu",
+            prefixIcon: Icon(
+              Icons.lock,
+            )),
         const SizedBox(
           height: 10,
         ),

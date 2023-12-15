@@ -1,4 +1,6 @@
 import 'dart:convert';
+import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:movies_profile/models/user.dart';
 
@@ -9,7 +11,23 @@ class Api {
       User user, AuthAction action) async {
     final body = user.toJson();
     String url;
+    // String baseLink = "http://10.0.2.2:3002";
     String baseLink = "http://127.0.0.1:3002";
+
+    // ...
+    // TargetPlatform platform = defaultTargetPlatform;
+
+    // if (platform == TargetPlatform.android) {
+    //   print("android");
+    //   String baseLink = "";
+    //   // ...
+    // } else if (platform == TargetPlatform.iOS) {
+    //   print("ios");
+    //   // ...
+    //   String baseLink = "http://127.0.0.1:3002";
+    // }
+    // ....
+
     if (action == AuthAction.login) {
       url = '$baseLink/dangnhap';
     } else if (action == AuthAction.register) {
