@@ -1,4 +1,3 @@
-import 'package:movies_profile/models/movie.dart';
 
 import '../interface/interface_home.dart';
 import '../sevices/api/api_movie.dart';

@@ -8,7 +8,7 @@ class ProfilePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xFFFF313230),
+      backgroundColor: const Color(0xffff313230),
       // Ví dụ mã màu đỏ bằng RGB
       appBar: CustomAppBar(
         title1: "",

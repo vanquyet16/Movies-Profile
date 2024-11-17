@@ -4,61 +4,114 @@ import 'package:movies_profile/views/tab/view_tab_home_page.dart';
 import 'package:movies_profile/views/tab/view_tab_love_page.dart';
 import 'package:movies_profile/views/tab/view_tab_profile_page.dart';
 
-class ButtomBar extends StatefulWidget {
-  const ButtomBar({super.key});
+class BottomBar extends StatefulWidget {
+  const BottomBar({Key? key}) : super(key: key);
 
   @override
-  State<ButtomBar> createState() => _ButtomBarState();
+  State<BottomBar> createState() => _BottomBarState();
 }
 
-class _ButtomBarState extends State<ButtomBar> {
+class _BottomBarState extends State<BottomBar> {
+  final PageController _pageController = PageController();
   int currentPageIndex = 0;
-  final tabs = [
-    const Scaffold(
-      body: MyHomePage(),
-    ),
-    const Scaffold(
-      body: PostPage(),
-    ),
-    const Scaffold(
-      body: LovePage(),
-    ),
-    const Scaffold(
-      body: ProfilePage(),
-    ),
+
+  final List<Widget> tabs = [
+    const MyHomePage(),
+    const PostPage(),
+    const LovePage(),
+    const ProfilePage(),
   ];
+
+  void _onTabTapped(int index) {
+    setState(() {
+      currentPageIndex = index;
+    });
+    _pageController.jumpToPage(index); // Điều hướng ngay lập tức
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        bottomNavigationBar: NavigationBar(
-          backgroundColor: Color(0xFF6D736D),
-          onDestinationSelected: (int index) {
-            setState(() {
-              currentPageIndex = index;
-            });
-          },
-          indicatorColor: Colors.amber,
-          selectedIndex: currentPageIndex,
-          destinations: const <Widget>[
-            NavigationDestination(
-              icon: Icon(Icons.home),
-              label: 'Home',
+      body: PageView(
+        controller: _pageController,
+        physics: const NeverScrollableScrollPhysics(), // Tắt vuốt ngang
+        children: tabs,
+      ),
+      bottomNavigationBar: Container(
+        color: const Color(0xFF6D736D), // Màu nền của thanh điều hướng
+        child: SafeArea(
+          top: false,
+          child: Container(
+            padding: const EdgeInsets.symmetric(vertical: 7),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                _buildCustomNavItem(
+                  icon: Icons.home,
+                  label: 'Home',
+                  index: 0,
+                ),
+                _buildCustomNavItem(
+                  icon: Icons.menu_book,
+                  label: 'Bài Đăng',
+                  index: 1,
+                ),
+                _buildCustomNavItem(
+                  icon: Icons.favorite,
+                  label: 'Yêu Thích',
+                  index: 2,
+                ),
+                _buildCustomNavItem(
+                  icon: Icons.account_circle,
+                  label: 'Hồ Sơ',
+                  index: 3,
+                ),
+              ],
             ),
-            NavigationDestination(
-              icon: Icon(Icons.menu_book),
-              label: 'Bài Đăng',
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildCustomNavItem({
+    required IconData icon,
+    required String label,
+    required int index,
+  }) {
+    final bool isSelected = currentPageIndex == index;
+    return GestureDetector(
+      onTap: () => _onTabTapped(index),
+      child: Container(
+        color: Colors.transparent, // Không cần nền xanh lá
+        padding: const EdgeInsets.symmetric(horizontal: 16),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Icon(
+              icon,
+              color: isSelected ? Colors.amber : Colors.white,
+              size: isSelected ? 30 : 24,
             ),
-            NavigationDestination(
-              icon: Icon(Icons.favorite),
-              label: 'Yêu Thích',
-            ),
-            NavigationDestination(
-              icon: Icon(Icons.account_circle),
-              label: 'Hồ Sơ',
+            Padding(
+              padding: const EdgeInsets.only(top: 8),
+              child: Text(
+                label,
+                style: TextStyle(
+                  color: isSelected ? Colors.amber : Colors.white,
+                  fontWeight: isSelected ? FontWeight.bold : FontWeight.normal,
+                ),
+              ),
             ),
           ],
         ),
-        body: tabs[currentPageIndex]);
+      ),
+    );
+  }
+
+  @override
+  void dispose() {
+    _pageController.dispose();
+    super.dispose();
   }
 }

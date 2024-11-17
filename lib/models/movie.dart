@@ -26,12 +26,12 @@ class Movie {
     final id = movie['id'];
     final title = movie['title'];
     final overview = movie['overview'];
-    final poster_path = movie['poster_path'];
+    final posterPath = movie['poster_path'];
     return Movie(
       id: id,
       title: title,
       overview: overview,
-      poster_path: poster_path,
+      poster_path: posterPath,
     );
   }
 }

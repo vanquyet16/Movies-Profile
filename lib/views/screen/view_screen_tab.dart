@@ -10,7 +10,7 @@ class TabScreen extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: ButtomBar(),
+      home: const BottomBar(),
       debugShowCheckedModeBanner: false,
     );
   }

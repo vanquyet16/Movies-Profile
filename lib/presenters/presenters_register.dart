@@ -2,7 +2,6 @@ import 'package:flutter/src/widgets/framework.dart';
 import 'package:movies_profile/component/component_dialog.dart';
 import 'package:movies_profile/models/user.dart';
 
-import '../interface/interface_login.dart';
 import '../interface/interface_register.dart';
 import '../sevices/api/api_login_register.dart';
 
@@ -50,6 +49,7 @@ class RegisterPresenterImpl implements RegisterPresenter {
       view?.showRegisterError("Tài khoản đã tồn tại");
       return;
     } else {
+      // ignore: use_build_context_synchronously
       DialogHelper.showSampleDialog(context, titleDialog, bodyDialog);
     }
   }
