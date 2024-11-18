@@ -1,5 +1,4 @@
 import 'dart:ffi';
-
 import 'package:flutter/material.dart';
 import 'package:movies_profile/interface/interface_home.dart';
 import 'package:movies_profile/sevices/api/api_movie.dart';
@@ -19,9 +18,10 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> implements HomeView {
   List<Movie> moviesTrending = [];
-  List<Movie> moviesComing = []; //
+  List<Movie> moviesComing = [];
   HomePresenter presenter = HomePresenterImpl();
   bool isDataLoaded = false;
+
   @override
   void initState() {
     super.initState();
@@ -38,8 +38,10 @@ class _MyHomePageState extends State<MyHomePage> implements HomeView {
 
   @override
   Widget build(BuildContext context) {
+    // double screenWidth = MediaQuery.of(context).size.width;
+    // double screenHeight = MediaQuery.of(context).size.height;
     return Scaffold(
-      backgroundColor: const Color(0xFFFF313230), // Đỏ
+      backgroundColor: const Color(0xffff313230),
       appBar: CustomAppBar(
         title1: "F",
         title2: "ilm Profile",
@@ -51,7 +53,7 @@ class _MyHomePageState extends State<MyHomePage> implements HomeView {
         onTap: () {
           Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => SearchScreen()),
+            MaterialPageRoute(builder: (context) => const SearchScreen()),
           );
         },
       ),
@@ -60,35 +62,47 @@ class _MyHomePageState extends State<MyHomePage> implements HomeView {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Container(
-              margin: const EdgeInsets.only(left: 17),
-              child: const Text(
-                "Xu Hướng",
-                style: TextStyle(
+            if (isDataLoaded) ...[
+              Container(
+                margin: const EdgeInsets.only(left: 17),
+                child: const Text(
+                  "Xu Hướng",
+                  style: TextStyle(
                     color: Colors.white,
                     fontSize: 20,
-                    fontWeight: FontWeight.bold),
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
               ),
-            ),
-            const SizedBox(
-              height: 16,
-            ),
-            MoviesTrenDing(
-                moviesTrending: moviesTrending, isDataLoaded: isDataLoaded),
-            const SizedBox(
-              height: 16,
-            ),
-            Container(
-              margin: const EdgeInsets.only(left: 17),
-              child: const Text(
-                "Sắp Chiếu",
-                style: TextStyle(
+              const SizedBox(height: 16),
+              MoviesTrenDing(
+                moviesTrending: moviesTrending,
+                isDataLoaded: isDataLoaded,
+              ),
+              const SizedBox(height: 16),
+              Container(
+                margin: const EdgeInsets.only(left: 17),
+                child: const Text(
+                  "Sắp Chiếu",
+                  style: TextStyle(
                     color: Colors.white,
                     fontSize: 20,
-                    fontWeight: FontWeight.bold),
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
               ),
-            ),
-            MoviesComing(moviesComing: moviesComing, isDataLoaded: isDataLoaded)
+              MoviesComing(
+                moviesComing: moviesComing,
+                isDataLoaded: isDataLoaded,
+              ),
+            ] else
+              const Center(
+                child: SizedBox(
+                  width: 20,
+                  height: 20,
+                  child: CircularProgressIndicator(strokeWidth: 2),
+                ),
+              ),
           ],
         ),
       ),
@@ -96,83 +110,88 @@ class _MyHomePageState extends State<MyHomePage> implements HomeView {
   }
 
   @override
-  void clearError() {
-    // TODO: implement clearError
-  }
+  void clearError() {}
 
   @override
   void hideLoading(bool value) {
-    // TODO: implement hideLoading
-    isDataLoaded = !value;
+    setState(() {
+      isDataLoaded = !value;
+    });
   }
 
   @override
   void showLoadError(String error) {
-    // TODO: implement showLoadError
+    print("Error loading movies: $error");
   }
 
   @override
   void showLoading(bool value) {
-    setState(() {});
+    setState(() {
+      isDataLoaded = !value;
+    });
   }
 
   @override
   void loadMovieComing(List<Movie> movies) {
-    print(movies);
     setState(() {
       moviesComing = movies;
+      isDataLoaded = true;
     });
-    // TODO: implement loadMovieComing
   }
 
   @override
   void loadMovieTrending(List<Movie> movies) {
-    print(movies);
     setState(() {
       moviesTrending = movies;
+      isDataLoaded = true;
     });
-    // TODO: implement loadMovieTrending
   }
 }
 
 class MoviesComing extends StatelessWidget {
-  const MoviesComing(
-      {super.key, required this.moviesComing, required this.isDataLoaded});
+  const MoviesComing({
+    Key? key,
+    required this.moviesComing,
+    required this.isDataLoaded,
+  }) : super(key: key);
+
   final List<Movie> moviesComing;
   final bool isDataLoaded;
 
   @override
   Widget build(BuildContext context) {
+    // Sử dụng MediaQuery để lấy chiều rộng màn hình
+    double screenWidth = MediaQuery.of(context).size.width;
+
+    if (!isDataLoaded || moviesComing.isEmpty) {
+      return const Center(
+        child: CircularProgressIndicator(strokeWidth: 2),
+      );
+    }
     return SizedBox(
       height: 200,
-      child: ClipRRect(
-        borderRadius: BorderRadius.circular(2),
-        child: ListView.builder(
-          scrollDirection: Axis.horizontal,
-          physics: const BouncingScrollPhysics(),
-          itemCount: 10,
-          itemBuilder: ((context, index) {
-            if (isDataLoaded) {
-              String img = moviesComing[index].poster_path;
-              final String? image500 = ApiMovies.getImage185(img);
-              return Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(8),
-                  child: Image.network(
-                    image500 ?? "",
-                    height: 300,
-                    fit: BoxFit.fitHeight,
-                  ),
-                ),
-              );
-            } else {
-              return const Center(
-                child: CircularProgressIndicator(),
-              );
-            }
-          }),
-        ),
+      child: ListView.builder(
+        scrollDirection: Axis.horizontal,
+        physics: const BouncingScrollPhysics(),
+        itemCount: moviesComing.length,
+        itemBuilder: (context, index) {
+          String img = moviesComing[index].poster_path;
+          final String? image500 = ApiMovies.getImage185(img);
+          return Padding(
+            // Áp dụng tỷ lệ phần trăm (2%) từ chiều rộng màn hình vào khoảng cách đệm
+            padding: EdgeInsets.all(screenWidth * 0.02),
+            child: ClipRRect(
+              // Áp dụng tỷ lệ phần trăm (3%) từ chiều rộng màn hình vào bán kính bo góc
+              borderRadius: BorderRadius.circular(screenWidth * 0.03),
+              child: Image.network(
+                image500 ?? "",
+                // Áp dụng tỷ lệ phần trăm (60%) từ chiều rộng màn hình cho chiều cao ảnh
+                height: screenWidth * 0.6,
+                fit: BoxFit.fitHeight,
+              ),
+            ),
+          );
+        },
       ),
     );
   }
@@ -190,47 +209,41 @@ class MoviesTrenDing extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      width: double.infinity,
-      child: CarouselSlider.builder(
-        itemCount: moviesTrending.length,
-        options: CarouselOptions(
-          height: 300,
-          autoPlay: true,
-          viewportFraction: 0.55,
-          enlargeCenterPage: true,
-          autoPlayCurve: Curves.fastOutSlowIn,
-          autoPlayAnimationDuration: const Duration(seconds: 2),
-          onPageChanged: (index, reason) {
-            print(index);
-          },
-        ),
-        itemBuilder: (context, itemIndex, pageViewIndex) {
-          if (isDataLoaded) {
-            String img = moviesTrending[itemIndex].poster_path;
-            final String? image500 = ApiMovies.getImage500(img);
-            print(image500);
-            return GestureDetector(
-              onTap: () {
-                print("Vị trí đã nhấp vào: $itemIndex");
-              },
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(12),
-                child: Image.network(
-                  image500 ?? "",
-                  height: 300,
-                  width: 200,
-                  fit: BoxFit.cover,
-                ),
-              ),
-            );
-          } else {
-            return const Center(
-              child: CircularProgressIndicator(),
-            );
-          }
-        },
+    // Sử dụng MediaQuery để lấy chiều rộng màn hình
+    double screenWidth = MediaQuery.of(context).size.width;
+
+    if (!isDataLoaded || moviesTrending.isEmpty) {
+      return const Center(
+        child: CircularProgressIndicator(strokeWidth: 2),
+      );
+    }
+    return CarouselSlider.builder(
+      itemCount: moviesTrending.length,
+      options: CarouselOptions(
+        // Áp dụng tỷ lệ phần trăm (75%) từ chiều rộng màn hình cho chiều cao của Carousel
+        height: screenWidth * 0.75,
+        autoPlay: true,
+        viewportFraction: 0.55,
+        enlargeCenterPage: true,
+        autoPlayCurve: Curves.fastOutSlowIn,
+        autoPlayAnimationDuration: const Duration(seconds: 2),
       ),
+      itemBuilder: (context, itemIndex, pageViewIndex) {
+        String img = moviesTrending[itemIndex].poster_path;
+        final String? image500 = ApiMovies.getImage500(img);
+        return ClipRRect(
+          // Áp dụng tỷ lệ phần trăm (3%) từ chiều rộng màn hình vào bán kính bo góc
+          borderRadius: BorderRadius.circular(screenWidth * 0.03),
+          child: Image.network(
+            image500 ?? "",
+            // Áp dụng tỷ lệ phần trăm (75%) từ chiều rộng màn hình cho chiều cao ảnh
+            height: screenWidth * 0.75,
+            // Áp dụng tỷ lệ phần trăm (50%) từ chiều rộng màn hình cho chiều rộng ảnh
+            width: screenWidth * 0.5,
+            fit: BoxFit.cover,
+          ),
+        );
+      },
     );
   }
 }

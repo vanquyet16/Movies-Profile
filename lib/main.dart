@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:movies_profile/widgets/bottom_bar.dart';
+import 'package:movies_profile/views/screen/view_screen_tab.dart';
 import 'views/screen/view_screen_login.dart';
 
 void main() {
@@ -30,7 +30,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: Login(),
+      home: const TabScreen(),
       debugShowCheckedModeBanner: false,
     );
   }

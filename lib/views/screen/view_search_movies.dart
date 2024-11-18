@@ -14,7 +14,7 @@ class _SearchScreenState extends State<SearchScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: const Color(0xFFFF313230),
+        backgroundColor: const Color(0xffff313230),
         appBar:
             CustomAppBar(title1: "", title2: "", iconData: null, onTap: () {}),
         body: const SingleChildScrollView(
@@ -35,7 +35,7 @@ class SearchWidget extends StatelessWidget {
     return Container(
       margin: const EdgeInsets.fromLTRB(10, 10, 10, 20),
       decoration: BoxDecoration(
-        color: const Color(0xFFFF313230),
+        color: const Color(0xffff313230),
         border: Border.all(
           color: Colors.white,
           width: 0.5,

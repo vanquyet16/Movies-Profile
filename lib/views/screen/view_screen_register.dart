@@ -1,11 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:movies_profile/component/component_textfield.dart';
-import 'package:movies_profile/component/component_dialog.dart';
-import 'package:movies_profile/interface/interface_login.dart';
 import 'package:movies_profile/interface/interface_register.dart';
 import 'package:movies_profile/views/screen/view_screen_login.dart';
 
-import '../../presenters/presenters_login.dart';
 import '../../presenters/presenters_register.dart';
 
 class Register extends StatelessWidget {
@@ -102,7 +99,7 @@ class _BodyState extends State<Body> implements RegisterView {
         CustomTextField(
           controller: edFullNameController,
           hintText: "Nhập Họ Tên",
-          prefixIcon: Icon(
+          prefixIcon: const Icon(
             Icons.person,
             color: Colors.black,
           ),
@@ -117,7 +114,7 @@ class _BodyState extends State<Body> implements RegisterView {
         CustomTextField(
           controller: edUserNameController,
           hintText: "Nhập Tài Khoản",
-          prefixIcon: Icon(
+          prefixIcon: const Icon(
             Icons.person,
             color: Colors.black,
           ),
@@ -132,7 +129,7 @@ class _BodyState extends State<Body> implements RegisterView {
         CustomTextField(
             controller: edPassController,
             hintText: "Nhâp Mật Khẩu",
-            prefixIcon: Icon(
+            prefixIcon: const Icon(
               Icons.lock,
               color: Colors.black,
             )),
@@ -146,7 +143,7 @@ class _BodyState extends State<Body> implements RegisterView {
         CustomTextField(
           controller: edRePassController,
           hintText: "Nhâp Lại Mật Khẩu",
-          prefixIcon: Icon(
+          prefixIcon: const Icon(
             Icons.lock,
             color: Colors.black,
           ),
