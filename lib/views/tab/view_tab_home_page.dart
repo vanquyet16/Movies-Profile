@@ -1,10 +1,10 @@
-import 'dart:ffi';
 import 'package:flutter/material.dart';
 import 'package:movies_profile/interface/interface_home.dart';
+import 'package:movies_profile/public/Color/AppColor.dart';
 import 'package:movies_profile/sevices/api/api_movie.dart';
 import 'package:movies_profile/views/screen/view_search_movies.dart';
 
-import '../../component/component_appbar.dart';
+import '../../component/component_appBar.dart';
 import '../../models/movie.dart';
 import '../../presenters/presenters_home.dart';
 import 'package:carousel_slider/carousel_slider.dart';
@@ -41,7 +41,7 @@ class _MyHomePageState extends State<MyHomePage> implements HomeView {
     // double screenWidth = MediaQuery.of(context).size.width;
     // double screenHeight = MediaQuery.of(context).size.height;
     return Scaffold(
-      backgroundColor: const Color(0xffff313230),
+      backgroundColor: AppColor.primaryColor,
       appBar: CustomAppBar(
         title1: "F",
         title2: "ilm Profile",

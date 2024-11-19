@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:movies_profile/views/screen/view_screen_tab.dart';
-import 'views/screen/view_screen_login.dart';
 
 void main() {
   runApp(const MyApp());

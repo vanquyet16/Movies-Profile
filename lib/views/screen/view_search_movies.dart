@@ -1,7 +1,8 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:flutter/material.dart';
-import 'package:movies_profile/component/component_appbar.dart';
+import 'package:movies_profile/component/component_appBar.dart';
+import 'package:movies_profile/public/Color/AppColor.dart';
 
 class SearchScreen extends StatefulWidget {
   const SearchScreen({super.key});
@@ -14,7 +15,7 @@ class _SearchScreenState extends State<SearchScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: const Color(0xffff313230),
+        backgroundColor: AppColor.primaryColor,
         appBar:
             CustomAppBar(title1: "", title2: "", iconData: null, onTap: () {}),
         body: const SingleChildScrollView(

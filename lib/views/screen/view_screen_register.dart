@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:movies_profile/component/component_textfield.dart';
 import 'package:movies_profile/interface/interface_register.dart';
+import 'package:movies_profile/public/Color/AppColor.dart';
 import 'package:movies_profile/views/screen/view_screen_login.dart';
 
 import '../../presenters/presenters_register.dart';
@@ -10,7 +11,7 @@ class Register extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: AppColor.whiteColor,
       body: SingleChildScrollView(
         child: Column(
           children: [
@@ -230,8 +231,8 @@ class _BodyState extends State<Body> implements RegisterView {
     // TODO: implement showRegisterError
   }
 
-  @override
-  void showDiaLog(context) {
-    //  DialogHelper.showSampleDialog(context);
-  }
+  // @override
+  // void showDiaLog(context) {
+  //   //  DialogHelper.showSampleDialog(context);
+  // }
 }

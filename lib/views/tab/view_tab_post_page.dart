@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:movies_profile/component/component_appbar.dart';
+import 'package:movies_profile/component/component_appBar.dart';
+import 'package:movies_profile/public/Color/AppColor.dart';
 
 class PostPage extends StatelessWidget {
   const PostPage({super.key});
@@ -13,7 +14,7 @@ class PostPage extends StatelessWidget {
         title2: "Bài Đăng Bạn Bè",
         iconData: const Icon(
           Icons.person_add,
-          color: Color(0xFF19AFDF),
+          color: AppColor.iconBlueColor,
           size: 30,
         ),
         onTap: () {},
@@ -76,7 +77,7 @@ class _ViewItemState extends State<ViewItem> {
       decoration: const BoxDecoration(
         border: Border(
           bottom: BorderSide(
-            color: Color(0xFF686868),
+            color: AppColor.secondaryColor,
             width: 1,
           ),
         ),
@@ -106,11 +107,11 @@ class _ViewItemState extends State<ViewItem> {
                       style: TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.bold,
-                        color: Colors.white,
+                        color: AppColor.textColorPrimary,
                       ),
                     ),
                     Text('10 phút trước',
-                        style: TextStyle(color: Colors.white)),
+                        style: TextStyle(color: AppColor.textColorPrimary)),
                   ],
                 ),
               ),
@@ -124,7 +125,7 @@ class _ViewItemState extends State<ViewItem> {
             style: TextStyle(
               fontSize: 16,
               fontWeight: FontWeight.bold,
-              color: Colors.white,
+              color: AppColor.textColorPrimary,
             ),
           ),
           const SizedBox(height: 5),
@@ -136,7 +137,7 @@ class _ViewItemState extends State<ViewItem> {
               fontSize: 14,
               fontWeight: FontWeight.normal,
               fontStyle: FontStyle.italic,
-              color: Colors.white,
+              color: AppColor.textColorPrimary,
             ),
           ),
           const SizedBox(height: 10),
@@ -186,13 +187,13 @@ class _ViewItemState extends State<ViewItem> {
                     const SizedBox(width: 5),
                     const Text(
                       "100",
-                      style: TextStyle(color: Colors.white),
+                      style: TextStyle(color: AppColor.textColorPrimary),
                     ),
                   ],
                 ),
                 const Row(
                   children: [
-                    Icon(Icons.star_rate, color: Colors.red),
+                    Icon(Icons.star_rate, color: AppColor.iconBlueColor),
                     SizedBox(width: 5),
                     Padding(
                       padding: EdgeInsets.only(top: 3),

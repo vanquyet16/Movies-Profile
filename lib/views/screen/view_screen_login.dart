@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:movies_profile/interface/interface_login.dart';
+import 'package:movies_profile/public/Color/AppColor.dart';
 import 'package:movies_profile/views/screen/view_screen_tab.dart';
 
 import '../../component/component_textfield.dart';
@@ -12,7 +13,7 @@ class Login extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: AppColor.whiteColor,
       body: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,

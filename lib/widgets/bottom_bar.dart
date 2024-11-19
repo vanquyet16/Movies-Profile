@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:movies_profile/public/Color/AppColor.dart';
 import 'package:movies_profile/views/tab/view_tab_post_page.dart';
 import 'package:movies_profile/views/tab/view_tab_home_page.dart';
 import 'package:movies_profile/views/tab/view_tab_love_page.dart';
@@ -38,7 +39,7 @@ class _BottomBarState extends State<BottomBar> {
         children: tabs,
       ),
       bottomNavigationBar: Container(
-        color: const Color(0xFF6D736D), // Màu nền của thanh điều hướng
+        color: AppColor.secondaryColor, // Màu nền của thanh điều hướng
         child: SafeArea(
           top: false,
           child: Container(
